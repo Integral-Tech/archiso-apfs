@@ -12,7 +12,7 @@ cleanup() {
 
 # Fetch and patch files
 setup() {
-	git clone "https://github.com/Integral-Tech/${srcname}.git"
+	git clone "https://github.com/Integral-Tech/${srcname}.git" -b base
 }
 
 # Build the ISO

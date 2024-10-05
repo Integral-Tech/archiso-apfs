@@ -1,0 +1,45 @@
+name: Build ArchISO
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+      options: --privileged 
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v4
+
+      - name: Edit pacman and makepkg config
+        run: |
+          sed -i 's|#ParallelDownloads.*|ParallelDownloads = 20|' /etc/pacman.conf
+          sed -i 's|#MAKEFLAGS.*|MAKEFLAGS="j4"|' /etc/makepkg.conf
+
+      - name: Update mirrorlist
+        run: echo -e 'Server = https://mirror.osbeck.com/archlinux/$repo/os/$arch\nServer = https://cloudflaremirrors.com/archlinux/$repo/os/$arch\nServer = https://archlinux.mailtunnel.eu/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+
+      - name: Add archlinuxcn repo & install keyring
+        run: |
+          echo -e '\n[archlinuxcn]\nServer = Server = https://repo.archlinuxcn.org/$arch' >> /etc/pacman.conf
+          pacman -Syyu archlinuxcn-keyring
+
+      - name: Build ArchISO
+        run: |
+          pacman -Syy --noconfirm archiso base-devel
+          ./scripts/build.sh
+
+      - name: Create release tags
+        run: |
+          echo "filePath=$(find archiso-apfs/out -type f)" >> $GITHUB_ENV
+          echo "fileName=$(find archiso-apfs/out -type f -exec basename {} \;)" >> $GITHUB_ENV
+          echo "fileTag=$(grep 'Version' scripts/build.sh | awk '{print $3)'" >> $GITHUB_ENV
+          echo ${{ env.filetag }}
+      
+      - name: Release ArchISO
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ env.filePath }}
+          name: ${{ env.fileName }}
+          tag_name: ${{ env.fileTag }}

@@ -22,8 +22,8 @@ jobs:
 
       - name: Add archlinuxcn repo & install keyring
         run: |
-          echo -e '\n[archlinuxcn]\nServer = Server = https://repo.archlinuxcn.org/$arch' >> /etc/pacman.conf
-          pacman -Syyu archlinuxcn-keyring
+          echo -e '\n[archlinuxcn]\nServer = https://repo.archlinuxcn.org/$arch' >> /etc/pacman.conf
+          pacman -Syyu --noconfirm archlinuxcn-keyring
 
       - name: Build ArchISO
         run: |

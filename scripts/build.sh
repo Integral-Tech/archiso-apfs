@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Description: Automate building the ArchISO
-# Version: v0.1
-
 srcname=archiso-apfs
 
 # Cleanup

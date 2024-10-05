@@ -39,15 +39,22 @@ jobs:
 
       - name: Create release tags
         run: |
-          isoPath=$(find archiso-apfs/out -type f)
+          outDir=archiso-apfs/out
+          isoPath=$(find $outDir -type f)
           echo "filePath=$isoPath" >> $GITHUB_ENV
           echo "fileName=$(basename $isoPath)" >> $GITHUB_ENV
           echo "fileTag=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
-          echo ${{ env.filetag }}
+          cd $outDir
+          sha256sum $fileName > sha256sum.txt
+          b2sum $fileName > b2sum.txt
       
       - name: Release ArchISO
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ env.filePath }}
+          files: |
+            ${{ env.filePath }}
+            sha256sum.txt
+            b2sum.txt
+
           name: ${{ env.fileName }}
           tag_name: ${{ env.fileTag }}

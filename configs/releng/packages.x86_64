@@ -3,6 +3,7 @@ amd-ucode
 apfsprogs-git
 arch-install-scripts
 archinstall
+archlinuxcn-keyring
 b43-fwcutter
 base
 bcachefs-tools

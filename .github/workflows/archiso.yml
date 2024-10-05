@@ -37,7 +37,7 @@ jobs:
         run: |
           echo "filePath=$(find archiso-apfs/out -type f)" >> $GITHUB_ENV
           echo "fileName=$(find archiso-apfs/out -type f -exec basename {} \;)" >> $GITHUB_ENV
-          echo "fileTag=$(grep 'Version' scripts/build.sh | awk '{print $3)'" >> $GITHUB_ENV
+          echo "fileTag=$(grep Version scripts/build.sh | awk '{print $3}')" >> $GITHUB_ENV
           echo ${{ env.filetag }}
       
       - name: Release ArchISO

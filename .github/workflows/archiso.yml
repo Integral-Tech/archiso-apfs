@@ -27,7 +27,7 @@ jobs:
 
       - name: Build ArchISO
         run: |
-          pacman -Syy --noconfirm archiso base-devel
+          pacman -Syy --noconfirm archiso base-devel git
           ./scripts/build.sh
 
       - name: Create release tags

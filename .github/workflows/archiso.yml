@@ -41,20 +41,21 @@ jobs:
         run: |
           outDir=archiso-apfs/out
           isoPath=$(find $outDir -type f)
+          isoName=$(basename $isoPath)
           echo "filePath=$isoPath" >> $GITHUB_ENV
-          echo "fileName=$(basename $isoPath)" >> $GITHUB_ENV
+          echo "fileName=$isoName" >> $GITHUB_ENV
           echo "fileTag=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
           cd $outDir
-          sha256sum $fileName > sha256sum.txt
-          b2sum $fileName > b2sum.txt
+          sha256sum $isoName > sha256sum.txt
+          b2sum $isoName > b2sum.txt
       
       - name: Release ArchISO
         uses: softprops/action-gh-release@v1
         with:
           files: |
             ${{ env.filePath }}
-            sha256sum.txt
-            b2sum.txt
+            archiso-apfs/out/sha256sum.txt
+            archiso-apfs/out/b2sum.txt
 
           name: ${{ env.fileName }}
           tag_name: ${{ env.fileTag }}

@@ -1,9 +1,8 @@
 alsa-utils
 amd-ucode
-apfsprogs-git
+apfsprogs
 arch-install-scripts
 archinstall
-archlinuxcn-keyring
 b43-fwcutter
 base
 bcachefs-tools
@@ -54,7 +53,7 @@ lftp
 libfido2
 libusb-compat
 linux
-linux-apfs-rw-dkms-git
+linux-apfs-rw-dkms
 linux-atm
 linux-firmware
 linux-firmware-marvell

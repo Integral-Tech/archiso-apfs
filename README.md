@@ -6,10 +6,9 @@
 ### core
 - [linux-headers](https://archlinux.org/packages/core/x86_64/linux-headers)
 
-### archlinuxcn
-- [archlinuxcn-keyring](https://github.com/archlinuxcn/repo/tree/master/archlinuxcn/archlinuxcn-keyring)
-- [linux-apfs-rw-dkms-git](https://github.com/archlinuxcn/repo/tree/master/archlinuxcn/linux-apfs-rw-dkms-git)
-- [apfsprogs-git](https://github.com/archlinuxcn/repo/tree/master/archlinuxcn/apfsprogs-git)
+### extra
+- [linux-apfs-rw-dkms](https://archlinux.org/packages/extra/any/linux-apfs-rw-dkms)
+- [apfsprogs](https://archlinux.org/packages/extra/x86_64/apfsprogs)
 
 ## Notes
 - By default, APFS partitions will be mounted as read-only.

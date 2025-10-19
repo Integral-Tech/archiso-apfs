@@ -25,11 +25,6 @@ jobs:
       - name: Initialize pacman secret key
         run: pacman-key --init
 
-      - name: Add archlinuxcn repo & install keyring
-        run: |
-          echo -e '\n[archlinuxcn]\nServer = https://repo.archlinuxcn.org/$arch' >> /etc/pacman.conf
-          pacman -Syyu --noconfirm archlinuxcn-keyring
-
       - name: Build ArchISO
         run: |
           pacman -Syy --noconfirm archiso base-devel git
